@@ -7,7 +7,7 @@ export default function ListItemHome(props: {
 }) {
     return (
         <li>
-            <div className="flex flex-col justify-center items-center w-52 text-center rounded-md min-h-48 p-4 shadow-2xl">
+            <div className="flex flex-col justify-center items-center w-52 text-center shadow-md bg-zinc-700 rounded-md min-h-48 p-4">
                 <p>{props.title}</p>
                 {props.children}
             </div>
