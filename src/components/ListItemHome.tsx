@@ -1,5 +1,4 @@
-import { Props } from "next/script";
-import React, { Children } from "react";
+import React from "react";
 
 export default function ListItemHome(props: {
     title: string;
@@ -7,9 +6,9 @@ export default function ListItemHome(props: {
 }) {
     return (
         <li>
-            <div className="flex flex-col justify-center items-center w-52 text-center shadow-md bg-zinc-700 rounded-md min-h-48 p-4">
-                <p>{props.title}</p>
-                {props.children}
+            <div className="flex flex-col justify-center items-center w-52 text-center shadow-md bg-slate-200 dark:bg-zinc-700 rounded-md min-h-48 p-4">
+                <p className="font-semibold text-md">{props.title}</p>
+                <div className="dark:text-zinc-400">{props.children}</div>
             </div>
         </li>
     );
