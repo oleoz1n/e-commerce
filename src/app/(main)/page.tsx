@@ -3,11 +3,14 @@ import { FaArrowDown } from "react-icons/fa";
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import dynamic from "next/dynamic";
-import SkeletonListItemHome from "@/components/SkeletonListItemHome";
+import SkeletonListItemHome from "@/components/Home/SkeletonListItemHome";
 
-const DynamicListItemHome = dynamic(() => import("@/components/ListItemHome"), {
-    loading: () => <SkeletonListItemHome />,
-});
+const DynamicListItemHome = dynamic(
+    () => import("@/components/Home/ListItemHome"),
+    {
+        loading: () => <SkeletonListItemHome />,
+    },
+);
 
 export default function Home() {
     const ref = useRef<HTMLDivElement>(null);
