@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React from "react";
 
 export default function ItemHome(props: {
@@ -5,11 +6,14 @@ export default function ItemHome(props: {
     children: React.ReactNode;
 }) {
     return (
-        <li>
-            <div className="flex flex-col justify-center items-center w-52 text-center shadow-md bg-slate-200 dark:bg-zinc-700 rounded-md min-h-48 p-4">
+        <motion.li
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}>
+            <div className="flex flex-col justify-center items-center w-52 h-48 text-center shadow-md bg-slate-200 dark:bg-zinc-700 rounded-md">
                 <p className="font-semibold text-md">{props.title}</p>
                 <div className="dark:text-zinc-400">{props.children}</div>
             </div>
-        </li>
+        </motion.li>
     );
 }

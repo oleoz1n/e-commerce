@@ -1,13 +1,13 @@
 "use client";
-import ListItemHome from "@/components/ListItemHome";
 import { FaArrowDown } from "react-icons/fa";
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import dynamic from "next/dynamic";
+import SkeletonListItemHome from "@/components/SkeletonListItemHome";
 
 
 const DynamicListItemHome = dynamic(() => import('@/components/ListItemHome'), {
-    loading: () => <p>Loading...</p>,
+    loading: () => <SkeletonListItemHome/>
   })
 
 export default function Home() {
@@ -51,7 +51,8 @@ export default function Home() {
                 className="h-fit flex flex-col justify-center items-center max-w-[960px] self-center text-center p-4"
             >
                 <h2 className="text-5xl font-bold">Nossos diferenciais</h2>
-                <ul className="flex w-full h-full flex-row flex-wrap gap-8 pt-16 pb-8 justify-center items-center">
+                <ul
+                className="flex w-full h-full flex-row flex-wrap gap-8 pt-16 pb-8 justify-center items-center">
                     <DynamicListItemHome/>
                 </ul>
             </section>
