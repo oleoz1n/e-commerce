@@ -32,15 +32,15 @@ export default function Header() {
                 <NavMobile />
             ) : (
                 <nav className="flex h-fit w-full flex-row items-center justify-evenly">
-                    <button className=" flex h-full flex-col items-center justify-center">
+                    <button className="flex h-full flex-col items-center justify-center duration-300 hover:scale-110 active:scale-95">
                         <IoBagRemove className="h-6 w-6" />
                         <h1 className="text-2xl">Produtos</h1>
                     </button>
-                    <button className=" flex h-full flex-col items-center justify-center">
+                    <button className=" flex h-full flex-col items-center justify-center duration-300 hover:scale-110 active:scale-95">
                         <AiOutlineBulb className="h-10 w-10" />
                         <h1 className="text-3xl">E-commerce</h1>
                     </button>
-                    <button className=" flex h-full flex-col items-center justify-center">
+                    <button className=" flex h-full flex-col items-center justify-center duration-300 hover:scale-110 active:scale-95">
                         <FaShoppingCart className="h-6 w-6" />
                         <h1 className="text-2xl">Carrinho</h1>
                     </button>
