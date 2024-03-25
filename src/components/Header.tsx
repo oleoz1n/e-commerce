@@ -16,7 +16,7 @@ export default function Header() {
             setWindowSize({
                 width: window.innerWidth,
                 height: window.innerHeight,
-            });
+            }); 
         }
 
         // Adiciona um event listener para o redimensionamento da janela
@@ -25,9 +25,10 @@ export default function Header() {
         // Remove o event listener quando o componente é desmontado
         return () => window.removeEventListener("resize", handleResize);
     }, []);
+
     return (
         <header className="w-full h-fit ">
-            {windowSize.width < 768 ? (
+            {windowSize.width <= 768 && windowSize.width != 0 ? (
                 <NavMobile />
             ) : (
                 <nav className="w-full h-fit flex justify-evenly items-center flex-row">

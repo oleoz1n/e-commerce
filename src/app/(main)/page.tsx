@@ -1,16 +1,14 @@
 "use client";
 import ListItemHome from "@/components/ListItemHome";
-import { ImBooks } from "react-icons/im";
-import { IoSearchCircleSharp } from "react-icons/io5";
-import { IoMdTrendingUp } from "react-icons/io";
-import { FaMoneyBillWave } from "react-icons/fa6";
-import { GiBuyCard } from "react-icons/gi";
-import { HiChatBubbleOvalLeftEllipsis } from "react-icons/hi2";
-import { BiSolidBrain } from "react-icons/bi";
-import { AiFillSafetyCertificate } from "react-icons/ai";
 import { FaArrowDown } from "react-icons/fa";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
+import dynamic from "next/dynamic";
+
+
+const DynamicListItemHome = dynamic(() => import('@/components/ListItemHome'), {
+    loading: () => <p>Loading...</p>,
+  })
 
 export default function Home() {
     const ref = useRef<HTMLDivElement>(null);
@@ -54,30 +52,7 @@ export default function Home() {
             >
                 <h2 className="text-5xl font-bold">Nossos diferenciais</h2>
                 <ul className="flex w-full h-full flex-row flex-wrap gap-8 pt-16 pb-8 justify-center items-center">
-                    <ListItemHome title="Variedade de Produtos">
-                        <ImBooks className="w-28 h-28" />
-                    </ListItemHome>
-                    <ListItemHome title="Facilidade de Navegação">
-                        <IoSearchCircleSharp className="w-28 h-28" />
-                    </ListItemHome>
-                    <ListItemHome title="Últimas Tendências e Novidades">
-                        <IoMdTrendingUp className="w-28 h-28" />
-                    </ListItemHome>
-                    <ListItemHome title="Preços Competitivos">
-                        <FaMoneyBillWave className="w-28 h-28" />
-                    </ListItemHome>
-                    <ListItemHome title="Conveniência de Compras Online">
-                        <GiBuyCard className="w-28 h-28" />
-                    </ListItemHome>
-                    <ListItemHome title="Atendimento ao Cliente de Excelência">
-                        <HiChatBubbleOvalLeftEllipsis className="w-28 h-28" />
-                    </ListItemHome>
-                    <ListItemHome title="Experiência Memorável">
-                        <BiSolidBrain className="w-28 h-28" />
-                    </ListItemHome>
-                    <ListItemHome title="Satisfação Garantida">
-                        <AiFillSafetyCertificate className="w-28 h-28" />
-                    </ListItemHome>
+                    <DynamicListItemHome/>
                 </ul>
             </section>
         </>
