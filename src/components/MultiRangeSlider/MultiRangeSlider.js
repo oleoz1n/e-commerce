@@ -3,9 +3,16 @@ import classnames from "classnames";
 import PropTypes from "prop-types";
 import "./multiRangeSlider.css";
 
-const MultiRangeSlider = ({ min, max, onChange }) => {
-    const [minVal, setMinVal] = useState(min);
-    const [maxVal, setMaxVal] = useState(max);
+const MultiRangeSlider = ({
+    min,
+    max,
+    onChange,
+    initialMaxVal = max,
+    initialMinVal = min,
+}) => {
+    const [minVal, setMinVal] = useState(initialMinVal);
+    const [maxVal, setMaxVal] = useState(initialMaxVal);
+    const [widthContainer, setWidthContainer] = useState(0);
     const minValRef = useRef(null);
     const maxValRef = useRef(null);
     const range = useRef(null);
@@ -46,12 +53,28 @@ const MultiRangeSlider = ({ min, max, onChange }) => {
         onChange({ min: minVal, max: maxVal });
     }, [minVal, maxVal, onChange]);
 
+    useEffect(() => {
+        // definir antes da tela carregar e não repetir
+        handleResize();
+        // Função para lidar com o redimensionamento da janela
+        function handleResize() {
+            const containerSlider = document.getElementById("containerSlider");
+            setWidthContainer(containerSlider.offsetWidth);
+        }
+
+        // Adiciona um event listener para o redimensionamento da janela
+        window.addEventListener("resize", handleResize);
+
+        // Remove o event listener quando o componente é desmontado
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
     return (
-        <div className="container_slider">
+        <div className="container_slider" id="containerSlider">
             <input
                 type="range"
                 min={min}
                 max={max}
+                step={50}
                 value={minVal}
                 ref={minValRef}
                 onChange={(event) => {
@@ -62,11 +85,15 @@ const MultiRangeSlider = ({ min, max, onChange }) => {
                 className={classnames("thumb thumb--zindex-3", {
                     "thumb--zindex-5": minVal > max - 100,
                 })}
+                style={{
+                    width: widthContainer + "px",
+                }}
             />
             <input
                 type="range"
                 min={min}
                 max={max}
+                step={50}
                 value={maxVal}
                 ref={maxValRef}
                 onChange={(event) => {
@@ -75,6 +102,9 @@ const MultiRangeSlider = ({ min, max, onChange }) => {
                     event.target.value = value.toString();
                 }}
                 className="thumb thumb--zindex-4"
+                style={{
+                    width: widthContainer + "px",
+                }}
             />
 
             <div className="slider">

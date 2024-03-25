@@ -1,6 +1,6 @@
 .container_slider {
     height: fit-content;
-    width: fit-content;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -8,7 +8,7 @@
 
 .slider {
     position: relative;
-    width: 200px;
+    width: 100%;
 }
 
 .slider__track,
@@ -25,7 +25,7 @@
 }
 
 .slider__track {
-    background-color: #ced4da;
+    background-color: rgb(var(--foreground-rgb));
     width: 100%;
     z-index: 1;
 }
@@ -37,7 +37,7 @@
 
 .slider__left-value,
 .slider__right-value {
-    color: #dee2e6;
+    color: rgb(var(--foreground-rgb));
     font-size: 12px;
     margin-top: 20px;
 }
@@ -61,7 +61,6 @@
     pointer-events: none;
     position: absolute;
     height: 0;
-    width: 200px;
     outline: none;
 }
 
@@ -79,10 +78,9 @@
 
 /* For Chrome browsers */
 .thumb::-webkit-slider-thumb {
-    background-color: #f1f5f7;
+    background-color: #9fe5e1;
     border: none;
     border-radius: 50%;
-    box-shadow: 0 0 1px 1px #ced4da;
     cursor: pointer;
     height: 18px;
     width: 18px;
@@ -93,10 +91,9 @@
 
 /* For Firefox browsers */
 .thumb::-moz-range-thumb {
-    background-color: #f1f5f7;
+    background-color: #9fe5e1;
     border: none;
     border-radius: 50%;
-    box-shadow: 0 0 1px 1px #ced4da;
     cursor: pointer;
     height: 18px;
     width: 18px;
