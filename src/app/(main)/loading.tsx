@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { useEffect, useState } from "react";
@@ -8,25 +8,43 @@ export default function Loading({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const [loading, setLoading] = useState(true)
-    useEffect(()=>{
-        setLoading(false)
-    }, [])
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        setLoading(false);
+    }, []);
 
     return (
         <>
-        {loading ? (<div className="h-full w-full flex justify-center items-center">
-        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="rgb(var(--foreground-rgb))" stroke-width="4"></circle>
-        <path className="opacity-75" fill="rgb(var(--foreground-rgb))" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-        </svg>
-        </div>) :
-        (
-            <>
-        <Header/>
-        {children}
-        <Footer/>
-        </>)}
+            {loading ? (
+                <div className="h-full w-full flex justify-center items-center">
+                    <svg
+                        className="animate-spin h-10 w-10 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                    >
+                        <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="rgb(var(--foreground-rgb))"
+                            strokeWidth="4"
+                        ></circle>
+                        <path
+                            className="opacity-75"
+                            fill="rgb(var(--foreground-rgb))"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                    </svg>
+                </div>
+            ) : (
+                <>
+                    <Header />
+                    {children}
+                    <Footer />
+                </>
+            )}
         </>
     );
 }
