@@ -50,6 +50,8 @@ export default function Produtos() {
                         setCheckboxesMarcadas={setCheckboxesMarcadas}
                         setPrecoMax={setPrecoMax}
                         setPrecoMin={setPrecoMin}
+                        precoMax={precoMax}
+                        precoMin={precoMin}
                     />
                     <div className="min-h-full w-4/5">{/*direita*/}</div>
                 </>

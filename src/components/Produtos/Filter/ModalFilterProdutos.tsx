@@ -1,6 +1,7 @@
 import MultiRangeSlider from "@/components/MultiRangeSlider/MultiRangeSlider";
 import React, { useEffect } from "react";
 import ProdutosListItem from "../ProdutosListItem";
+import Variaveis from "@/modules/Variaveis";
 
 export default function ModalFilterProdutos({
     checkboxesMarcadas,
@@ -78,7 +79,7 @@ export default function ModalFilterProdutos({
                     </label>
                     <MultiRangeSlider
                         min={0}
-                        max={5400}
+                        max={Variaveis.MaiorPreco}
                         initialMinVal={precoMin}
                         initialMaxVal={precoMax}
                         onChange={({ min, max }) => (

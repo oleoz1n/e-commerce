@@ -1,17 +1,22 @@
 import React, { useEffect } from "react";
 import ProdutosListItem from "../ProdutosListItem";
 import MultiRangeSlider from "../../MultiRangeSlider/MultiRangeSlider";
+import Variaveis from "@/modules/Variaveis";
 
 export default function FitlerProdutos({
     checkboxesMarcadas,
     setCheckboxesMarcadas,
     setPrecoMin,
     setPrecoMax,
+    precoMax,
+    precoMin,
 }: {
     setCheckboxesMarcadas: React.Dispatch<React.SetStateAction<string[]>>;
     checkboxesMarcadas: string[];
     setPrecoMax: React.Dispatch<React.SetStateAction<number>>;
     setPrecoMin: React.Dispatch<React.SetStateAction<number>>;
+    precoMax: number;
+    precoMin: number;
 }) {
     const [clickInput, setClickInput] = React.useState(false);
     const handleClick = () => {
@@ -48,7 +53,9 @@ export default function FitlerProdutos({
                 </label>
                 <MultiRangeSlider
                     min={0}
-                    max={5400}
+                    max={Variaveis.MaiorPreco}
+                    initialMaxVal={precoMax}
+                    initialMinVal={precoMin}
                     onChange={({ min, max }) => (
                         setPrecoMin(min), setPrecoMax(max)
                     )}
