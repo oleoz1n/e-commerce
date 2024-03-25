@@ -1,64 +1,59 @@
 "use client";
-import MultiRangeSlider from "@/components/MultiRangeSlider/MultiRangeSlider";
-import ProdutosListItem from "@/components/ProdutosListItem";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import FilterProdutos from "@/components/Produtos/Filter/FitlerProdutos";
+import FilterProdutosMobile from "@/components/Produtos/Filter/FilterProdutosMobile";
 
 export default function Produtos() {
-    const [precoMin, setPrecoMin] = React.useState(0);
-    const [precoMax, setPrecoMax] = React.useState(5400);
+    const [checkboxesMarcadas, setCheckboxesMarcadas] = useState<string[]>([]);
+    const [precoMin, setPrecoMin] = useState(0);
+    const [precoMax, setPrecoMax] = useState(5400);
+
+    const [windowSize, setWindowSize] = useState({
+        width: typeof window !== "undefined" ? window.innerWidth : 0,
+        height: typeof window !== "undefined" ? window.innerHeight : 0,
+    });
+
+    useEffect(() => {
+        function handleResize() {
+            setWindowSize({
+                width: window.innerWidth,
+                height: window.innerHeight,
+            });
+        }
+
+        // Adiciona um event listener para o redimensionamento da janela
+        window.addEventListener("resize", handleResize);
+
+        // Remove o event listener quando o componente é desmontado
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
     return (
-        <main className="flex min-h-full w-full flex-row">
-            <div className="mt-10 flex min-h-full w-1/5 flex-col items-center">
-                <div className="h-fit w-full p-4 pb-12">
-                    <label
-                        htmlFor="default-range"
-                        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                        Preço
-                    </label>
-                    <MultiRangeSlider
-                        min={0}
-                        max={5400}
-                        onChange={({ min, max }) => (
-                            setPrecoMin(min), setPrecoMax(max)
-                        )}
+        <main
+            className={`flex min-h-full w-full ${windowSize.width < 1280 ? "flex-col" : "flex-row"}`}
+        >
+            {windowSize.width < 1280 ? (
+                <>
+                    <FilterProdutosMobile
+                        checkboxesMarcadas={checkboxesMarcadas}
+                        setCheckboxesMarcadas={setCheckboxesMarcadas}
+                        setPrecoMax={setPrecoMax}
+                        setPrecoMin={setPrecoMin}
+                        precoMax={precoMax}
+                        precoMin={precoMin}
                     />
-                </div>
-                <div className="flex w-full flex-col gap-4 rounded-xl bg-zinc-700 p-4">
-                    <div>
-                        <label htmlFor="tipos">Tipos</label>
-                        <ul className="flex flex-col">
-                            <ProdutosListItem
-                                name="informatica"
-                                text="Informática"
-                            />
-                            <ProdutosListItem
-                                name="eletrodomesticos"
-                                text="Eletrodomésticos"
-                            />
-                            <ProdutosListItem
-                                name="celulares"
-                                text="Celulares"
-                            />
-                            <ProdutosListItem name="moveis" text="Móveis" />
-                            <ProdutosListItem name="roupas" text="Roupas" />
-                            <ProdutosListItem name="calcados" text="Calçados" />
-                        </ul>
-                    </div>
-                    <div>
-                        <label htmlFor="marcas">Marcas</label>
-                        <ul>
-                            <ProdutosListItem name="samsung" text="Samsung" />
-                            <ProdutosListItem name="apple" text="Apple" />
-                            <ProdutosListItem name="lg" text="LG" />
-                            <ProdutosListItem name="motorola" text="Motorola" />
-                            <ProdutosListItem name="dell" text="Dell" />
-                            <ProdutosListItem name="hp" text="HP" />
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div className="min-h-full w-4/5">{/*direita*/}</div>
+                    <div className="h-fit">{/*baixo*/}</div>
+                </>
+            ) : (
+                <>
+                    <FilterProdutos
+                        checkboxesMarcadas={checkboxesMarcadas}
+                        setCheckboxesMarcadas={setCheckboxesMarcadas}
+                        setPrecoMax={setPrecoMax}
+                        setPrecoMin={setPrecoMin}
+                    />
+                    <div className="min-h-full w-4/5">{/*direita*/}</div>
+                </>
+            )}
         </main>
     );
 }

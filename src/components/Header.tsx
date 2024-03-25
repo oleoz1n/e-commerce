@@ -28,8 +28,16 @@ export default function Header() {
 
     return (
         <header className="h-fit w-full ">
-            {windowSize.width <= 768 && windowSize.width != 0 ? (
-                <NavMobile />
+            {windowSize.width < 768 ? (
+                <div className="flex h-16">
+                    <NavMobile />
+                    <div className="flex h-full w-full flex-row items-center justify-center">
+                        <div className=" flex h-full flex-col items-center justify-center">
+                            <AiOutlineBulb className="h-10 w-10" />
+                            <h1 className="text-3xl">E-commerce</h1>
+                        </div>
+                    </div>
+                </div>
             ) : (
                 <nav className="flex h-fit w-full flex-row items-center justify-evenly">
                     <button className="flex h-full flex-col items-center justify-center duration-300 hover:scale-110 active:scale-95">
