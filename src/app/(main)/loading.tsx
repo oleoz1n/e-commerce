@@ -16,9 +16,9 @@ export default function Loading({
     return (
         <>
             {loading ? (
-                <div className="h-full w-full flex justify-center items-center">
+                <div className="flex h-full w-full items-center justify-center">
                     <svg
-                        className="animate-spin h-10 w-10 text-white"
+                        className="h-10 w-10 animate-spin text-white"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"

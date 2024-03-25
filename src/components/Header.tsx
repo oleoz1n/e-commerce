@@ -16,7 +16,7 @@ export default function Header() {
             setWindowSize({
                 width: window.innerWidth,
                 height: window.innerHeight,
-            }); 
+            });
         }
 
         // Adiciona um event listener para o redimensionamento da janela
@@ -27,21 +27,21 @@ export default function Header() {
     }, []);
 
     return (
-        <header className="w-full h-fit ">
+        <header className="h-fit w-full ">
             {windowSize.width <= 768 && windowSize.width != 0 ? (
                 <NavMobile />
             ) : (
-                <nav className="w-full h-fit flex justify-evenly items-center flex-row">
-                    <button className=" h-full flex justify-center flex-col items-center">
-                        <IoBagRemove className="w-6 h-6" />
+                <nav className="flex h-fit w-full flex-row items-center justify-evenly">
+                    <button className=" flex h-full flex-col items-center justify-center">
+                        <IoBagRemove className="h-6 w-6" />
                         <h1 className="text-2xl">Produtos</h1>
                     </button>
-                    <button className=" h-full flex justify-center flex-col items-center">
-                        <AiOutlineBulb className="w-10 h-10" />
+                    <button className=" flex h-full flex-col items-center justify-center">
+                        <AiOutlineBulb className="h-10 w-10" />
                         <h1 className="text-3xl">E-commerce</h1>
                     </button>
-                    <button className=" h-full flex justify-center flex-col items-center">
-                        <FaShoppingCart className="w-6 h-6" />
+                    <button className=" flex h-full flex-col items-center justify-center">
+                        <FaShoppingCart className="h-6 w-6" />
                         <h1 className="text-2xl">Carrinho</h1>
                     </button>
                 </nav>

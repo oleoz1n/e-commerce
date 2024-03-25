@@ -24,7 +24,7 @@ const sidebar = {
 const Path = (
     props: JSX.IntrinsicAttributes &
         SVGMotionProps<SVGPathElement> &
-        RefAttributes<SVGPathElement>
+        RefAttributes<SVGPathElement>,
 ) => (
     <motion.path
         fill="transparent"
@@ -38,7 +38,7 @@ const Path = (
 const MenuItem = ({ i }: { i: any }) => {
     return (
         <motion.li
-            className="mb-[20px] flex items-center text-[rgb(var(--inverse-rgb))] dark:text-zinc-700 font-semibold text-2xl"
+            className="mb-[20px] flex items-center text-2xl font-semibold text-[rgb(var(--inverse-rgb))] dark:text-zinc-700"
             variants={variantsLi}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
@@ -84,12 +84,12 @@ export default function HeaderMobile() {
         <motion.nav
             initial={false}
             animate={isOpen ? "open" : "closed"}
-            className="w-full h-fit fixed"
+            className="fixed h-fit w-full"
             ref={containerRef}
         >
             <motion.button
                 onClick={() => toggleOpen()}
-                className="fixed flex items-center z-10 justify-center outline-none border-none select-none top-18 left-15 w-[50px] h-[50px] rounded-full bg-slate-700 dark:bg-slate-50"
+                className="top-18 left-15 fixed z-10 flex h-[50px] w-[50px] select-none items-center justify-center rounded-full border-none bg-slate-700 outline-none dark:bg-slate-50"
             >
                 <svg width="23" height="23" viewBox="0 0 23 23">
                     <Path
@@ -115,10 +115,10 @@ export default function HeaderMobile() {
                 </svg>
             </motion.button>
             <motion.div
-                className="fixed left-0 top-0 bottom-0 w-[80%] bg-slate-700 dark:bg-slate-50"
+                className="fixed bottom-0 left-0 top-0 w-[80%] bg-slate-700 dark:bg-slate-50"
                 variants={sidebar}
             ></motion.div>
-            <motion.ul className="top-[100px] fixed" variants={variantsUl}>
+            <motion.ul className="fixed top-[100px]" variants={variantsUl}>
                 {items.map((item, index) => (
                     <MenuItem key={index} i={item} />
                 ))}

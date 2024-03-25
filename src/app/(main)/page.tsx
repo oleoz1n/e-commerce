@@ -5,10 +5,9 @@ import { motion, useInView } from "framer-motion";
 import dynamic from "next/dynamic";
 import SkeletonListItemHome from "@/components/SkeletonListItemHome";
 
-
-const DynamicListItemHome = dynamic(() => import('@/components/ListItemHome'), {
-    loading: () => <SkeletonListItemHome/>
-  })
+const DynamicListItemHome = dynamic(() => import("@/components/ListItemHome"), {
+    loading: () => <SkeletonListItemHome />,
+});
 
 export default function Home() {
     const ref = useRef<HTMLDivElement>(null);
@@ -22,7 +21,7 @@ export default function Home() {
     return (
         <>
             <motion.button
-                className={`bg-slate-300 dark:bg-zinc-600 fixed right-8 bottom-8 p-4 rounded-full animate-bounce max-md:hidden ${
+                className={`fixed bottom-8 right-8 animate-bounce rounded-full bg-slate-300 p-4 max-md:hidden dark:bg-zinc-600 ${
                     animationEnd ? "hidden" : ""
                 }`}
                 transition={{ duration: 0.3 }}
@@ -36,24 +35,23 @@ export default function Home() {
             >
                 <FaArrowDown size={24} />
             </motion.button>
-            <main className="w-full min-h-[100%] flex justify-center flex-col items-center p-4 pb-[8%] max-w-[960px] gap-4 self-center text-center">
+            <main className="flex min-h-[100%] w-full max-w-[960px] flex-col items-center justify-center gap-4 self-center p-4 pb-[8%] text-center">
                 <h1 className="text-5xl font-bold">Bem-vindo ao E-commerce</h1>
                 <p className="text-2xl font-normal">
                     Damos as boas-vindas calorosas ao nosso e-commerce, onde sua
                     experiência de compras é nossa prioridade número um.
                 </p>
-                <button className="p-4 font-bold bg-slate-200 dark:bg-zinc-700 shadow-md rounded-md bg-gradient-button hover:scale-105 hover:shadow-xl active:scale-95 active:shadow-sm transition-all">
+                <button className="bg-gradient-button rounded-md bg-slate-200 p-4 font-bold shadow-md transition-all hover:scale-105 hover:shadow-xl active:scale-95 active:shadow-sm dark:bg-zinc-700">
                     Ir para produtos
                 </button>
             </main>
             <section
                 ref={ref}
-                className="h-fit flex flex-col justify-center items-center max-w-[960px] self-center text-center p-4"
+                className="flex h-fit max-w-[960px] flex-col items-center justify-center self-center p-4 text-center"
             >
                 <h2 className="text-5xl font-bold">Nossos diferenciais</h2>
-                <ul
-                className="flex w-full h-full flex-row flex-wrap gap-8 pt-16 pb-8 justify-center items-center">
-                    <DynamicListItemHome/>
+                <ul className="flex h-full w-full flex-row flex-wrap items-center justify-center gap-8 pb-8 pt-16">
+                    <DynamicListItemHome />
                 </ul>
             </section>
         </>
