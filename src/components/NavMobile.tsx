@@ -1,5 +1,6 @@
 "use client";
 import { SVGMotionProps, motion, useCycle } from "framer-motion";
+import Link from "next/link";
 import { JSX, RefAttributes, useRef } from "react";
 
 const sidebar = {
@@ -35,7 +36,7 @@ const Path = (
     />
 );
 
-const MenuItem = ({ i }: { i: any }) => {
+const MenuItem = ({ i, toggleClose }: { i: any; toggleClose: any }) => {
     return (
         <motion.li
             className="mb-[20px] flex items-center text-2xl font-semibold text-[rgb(var(--inverse-rgb))] dark:text-zinc-700"
@@ -43,7 +44,9 @@ const MenuItem = ({ i }: { i: any }) => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
         >
-            <p>{i}</p>
+            <Link href={`${i.uri}`} scroll={false} onClick={toggleClose}>
+                <p>{i.nome}</p>
+            </Link>
         </motion.li>
     );
 };
@@ -75,11 +78,21 @@ const variantsUl = {
     },
 };
 
-const items = ["Home", "Produtos", "Cart"];
+const items = [
+    { nome: "Home", uri: "/" },
+    { nome: "Produtos", uri: "/produtos" },
+    { nome: "Carrinho", uri: "/carrinho" },
+];
 
 export default function HeaderMobile() {
     const [isOpen, toggleOpen] = useCycle(false, true);
     const containerRef = useRef(null);
+
+    const toggleClose = () => {
+        if (isOpen) {
+            toggleOpen();
+        }
+    };
     return (
         <motion.nav
             initial={false}
@@ -120,7 +133,7 @@ export default function HeaderMobile() {
             ></motion.div>
             <motion.ul className="fixed top-[100px]" variants={variantsUl}>
                 {items.map((item, index) => (
-                    <MenuItem key={index} i={item} />
+                    <MenuItem key={index} i={item} toggleClose={toggleClose} />
                 ))}
             </motion.ul>
         </motion.nav>
