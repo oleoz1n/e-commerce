@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import dynamic from "next/dynamic";
 import SkeletonListItemHome from "@/components/Home/SkeletonListItemHome";
+import Link from "next/link";
 
 const DynamicListItemHome = dynamic(
     () => import("@/components/Home/ListItemHome"),
@@ -44,9 +45,12 @@ export default function Home() {
                     Damos as boas-vindas calorosas ao nosso e-commerce, onde sua
                     experiência de compras é nossa prioridade número um.
                 </p>
-                <button className="bg-gradient-button rounded-md bg-slate-200 p-4 font-bold shadow-md transition-all hover:scale-105 hover:shadow-xl active:scale-95 active:shadow-sm dark:bg-zinc-700">
+                <Link
+                    href={"/produtos"}
+                    className="bg-gradient-button rounded-md bg-slate-200 p-4 font-bold shadow-md transition-all hover:scale-105 hover:shadow-xl active:scale-95 active:shadow-sm dark:bg-zinc-700"
+                >
                     Ir para produtos
-                </button>
+                </Link>
             </main>
             <section
                 ref={ref}
