@@ -6,16 +6,15 @@ export default function ProdutosList(props: {
     onChange: any;
 }) {
     return (
-        <li className="flex flex-row gap-2">
+        <label className="flex flex-row gap-2 text-xl font-normal max-xl:font-semibold">
             <input
                 className="accent-[rgb(0,92,200)]"
                 type="checkbox"
                 name={props.name}
                 onChange={props.onChange}
             />
-            <p className="text-xl font-normal max-xl:font-semibold">
-                {props.text}
-            </p>
-        </li>
+
+            {props.text}
+        </label>
     );
 }
