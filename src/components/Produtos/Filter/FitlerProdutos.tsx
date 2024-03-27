@@ -43,7 +43,7 @@ export default function FitlerProdutos({
         setCheckboxesMarcadas(checkboxesMarcadas);
     }, [clickInput, setCheckboxesMarcadas]);
     return (
-        <form className="mt-10 flex min-h-full w-1/5 flex-col items-center">
+        <form className="flex min-h-full w-1/5 flex-col items-center">
             <fieldset className="flex h-fit w-full flex-col gap-2 p-4 pb-12">
                 <legend className="text-xl font-bold text-gray-900 dark:text-white">
                     Preço

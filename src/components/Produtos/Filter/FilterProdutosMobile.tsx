@@ -30,7 +30,7 @@ export default function FilterProdutosMobile({
                     setShowModal={setShowModal}
                 />
             )}
-            <div className="mt-6">
+            <div>
                 <button
                     onClick={() => setShowModal(true)}
                     type="button"
