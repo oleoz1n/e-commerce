@@ -43,14 +43,11 @@ export default function FitlerProdutos({
         setCheckboxesMarcadas(checkboxesMarcadas);
     }, [clickInput, setCheckboxesMarcadas]);
     return (
-        <div className="mt-10 flex min-h-full w-1/5 flex-col items-center">
-            <div className="flex h-fit w-full flex-col gap-2 p-4 pb-12">
-                <label
-                    htmlFor="default-range"
-                    className="text-xl font-bold text-gray-900 dark:text-white"
-                >
+        <form className="mt-10 flex min-h-full w-1/5 flex-col items-center">
+            <fieldset className="flex h-fit w-full flex-col gap-2 p-4 pb-12">
+                <legend className="text-xl font-bold text-gray-900 dark:text-white">
                     Preço
-                </label>
+                </legend>
                 <MultiRangeSlider
                     min={0}
                     max={Variaveis.MaiorPreco}
@@ -60,12 +57,10 @@ export default function FitlerProdutos({
                         setPrecoMin(min), setPrecoMax(max)
                     )}
                 />
-            </div>
+            </fieldset>
             <div className="flex w-full flex-col gap-4 rounded-xl bg-slate-200 p-4 dark:bg-zinc-700">
-                <div>
-                    <label htmlFor="tipos" className="text-xl font-bold">
-                        Tipos
-                    </label>
+                <fieldset>
+                    <legend className="text-xl font-bold">Tipos</legend>
                     <ul className="flex flex-col">
                         <ProdutosListItem
                             onChange={handleClick}
@@ -98,11 +93,9 @@ export default function FitlerProdutos({
                             text="Calçados"
                         />
                     </ul>
-                </div>
-                <div>
-                    <label htmlFor="marcas" className="text-xl font-bold">
-                        Marcas
-                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend className="text-xl font-bold">Marcas</legend>
                     <ul>
                         <ProdutosListItem
                             onChange={handleClick}
@@ -135,8 +128,8 @@ export default function FitlerProdutos({
                             text="HP"
                         />
                     </ul>
-                </div>
+                </fieldset>
             </div>
-        </div>
+        </form>
     );
 }

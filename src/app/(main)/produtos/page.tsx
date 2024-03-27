@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import FilterProdutos from "@/components/Produtos/Filter/FitlerProdutos";
 import FilterProdutosMobile from "@/components/Produtos/Filter/FilterProdutosMobile";
+import InputSearch from "@/components/Produtos/Search/InputSearch";
 
 export default function Produtos() {
     const [checkboxesMarcadas, setCheckboxesMarcadas] = useState<string[]>([]);
@@ -41,7 +42,9 @@ export default function Produtos() {
                         precoMax={precoMax}
                         precoMin={precoMin}
                     />
-                    <div className="h-fit">{/*baixo*/}</div>
+                    <div className="h-fit">
+                        <InputSearch />
+                    </div>
                 </>
             ) : (
                 <>
@@ -53,7 +56,9 @@ export default function Produtos() {
                         precoMax={precoMax}
                         precoMin={precoMin}
                     />
-                    <div className="min-h-full w-4/5">{/*direita*/}</div>
+                    <div className="flex min-h-full w-4/5 flex-col p-2">
+                        <InputSearch />
+                    </div>
                 </>
             )}
         </main>

@@ -69,14 +69,11 @@ export default function ModalFilterProdutos({
                     </svg>
                 </button>
             </div>
-            <div className="mt-10 flex h-full w-full flex-col items-center ">
-                <div className="flex h-fit w-full flex-col gap-2 p-4 pb-12">
-                    <label
-                        htmlFor="default-range"
-                        className="text-xl font-bold text-gray-900 dark:text-white"
-                    >
+            <form className="mt-10 flex h-full w-full flex-col items-center ">
+                <fieldset className="flex h-fit w-full flex-col gap-2 p-4 pb-12">
+                    <legend className="text-xl font-bold text-gray-900 dark:text-white">
                         Preço
-                    </label>
+                    </legend>
                     <MultiRangeSlider
                         min={0}
                         max={Variaveis.MaiorPreco}
@@ -86,12 +83,10 @@ export default function ModalFilterProdutos({
                             setPrecoMin(min), setPrecoMax(max)
                         )}
                     />
-                </div>
+                </fieldset>
                 <div className="flex w-full flex-col gap-4 rounded-xl p-4">
-                    <div>
-                        <label htmlFor="tipos" className="text-xl font-bold">
-                            Tipos
-                        </label>
+                    <fieldset>
+                        <legend className="text-xl font-bold">Tipos</legend>
                         <ul className="flex flex-col">
                             <ProdutosListItem
                                 name="informatica"
@@ -124,11 +119,9 @@ export default function ModalFilterProdutos({
                                 onChange={handleClick}
                             />
                         </ul>
-                    </div>
-                    <div>
-                        <label htmlFor="marcas" className="text-xl font-bold">
-                            Marcas
-                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <legend className="text-xl font-bold">Marcas</legend>
                         <ul>
                             <ProdutosListItem
                                 name="samsung"
@@ -161,9 +154,9 @@ export default function ModalFilterProdutos({
                                 onChange={handleClick}
                             />
                         </ul>
-                    </div>
+                    </fieldset>
                 </div>
-            </div>
+            </form>
         </div>
     );
 }
