@@ -39,7 +39,7 @@ const Path = (
 const MenuItem = ({ i, toggleClose }: { i: any; toggleClose: any }) => {
     return (
         <motion.li
-            className="mb-[20px] flex items-center text-2xl font-semibold text-[rgb(var(--inverse-rgb))] dark:text-zinc-700"
+            className="z-50 mb-[20px] flex items-center text-2xl font-semibold text-[rgb(var(--inverse-rgb))] dark:text-zinc-700"
             variants={variantsLi}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
@@ -97,12 +97,12 @@ export default function HeaderMobile() {
         <motion.nav
             initial={false}
             animate={isOpen ? "open" : "closed"}
-            className="fixed h-fit w-full"
+            className="fixed z-50 h-fit w-full"
             ref={containerRef}
         >
             <motion.button
                 onClick={() => toggleOpen()}
-                className="top-18 left-15 fixed z-10 flex h-[50px] w-[50px] select-none items-center justify-center rounded-full border-none bg-slate-700 outline-none dark:bg-slate-50"
+                className="top-18 left-15 fixed z-50 flex h-[50px] w-[50px] select-none items-center justify-center rounded-full border-none bg-slate-700 outline-none dark:bg-slate-50"
             >
                 <svg width="23" height="23" viewBox="0 0 23 23">
                     <Path

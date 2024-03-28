@@ -1,8 +1,13 @@
+import { motion } from "framer-motion";
 import React from "react";
 import { FaSearch } from "react-icons/fa";
 export default function SearchPopUp({ search }: { search: string }) {
     return (
-        <div className="w-[80%] rounded-b-lg border-y-2 border-zinc-800 bg-slate-200 py-3 max-xl:w-[100%] dark:bg-zinc-700">
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="absolute top-12 z-10 w-[90%] rounded-b-lg border-y-2 border-zinc-800 bg-slate-200 py-3 max-xl:w-[100%] dark:bg-zinc-700"
+        >
             <ul className="flex flex-col gap-2">
                 <li className="flex h-full w-full cursor-pointer flex-row flex-nowrap items-center gap-2 whitespace-nowrap text-nowrap p-3 hover:bg-zinc-600">
                     <span>{<FaSearch />}</span>
@@ -20,6 +25,6 @@ export default function SearchPopUp({ search }: { search: string }) {
                     item 2
                 </li>
             </ul>
-        </div>
+        </motion.div>
     );
 }

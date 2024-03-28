@@ -23,10 +23,10 @@ export default function InputSearch() {
     return (
         <form
             onSubmit={handleSubmit}
-            className="flex w-full flex-col items-center"
+            className="relative flex w-full flex-col items-center"
         >
             <div
-                className={`relative flex w-[80%] flex-row flex-nowrap items-center gap-2 bg-slate-200 p-3 max-xl:w-[100%] dark:bg-zinc-700 ${showSearchPopup ? "rounded-t-lg" : "rounded-lg"}`}
+                className={`relative flex w-[90%] flex-row flex-nowrap items-center gap-2 bg-slate-200 p-3 max-xl:w-[100%] dark:bg-zinc-700 ${showSearchPopup ? "rounded-t-lg" : "rounded-lg"}`}
             >
                 <input
                     type="text"
