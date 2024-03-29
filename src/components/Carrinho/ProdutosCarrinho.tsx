@@ -69,7 +69,6 @@ export default function ProdutosCarrinho({
                             }
                         />
                         <button
-                            disabled={quantidade === 1}
                             className="rounded-full bg-white p-1 dark:bg-zinc-800"
                             onClick={() => setQuantidade(quantidade + 1)}
                         >
