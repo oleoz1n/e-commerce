@@ -1,6 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@supports not (overflow-wrap: anywhere) {
+    .break-anywhere {
+        word-break: break-word;
+    }
+}
+
+@supports (overflow-wrap: anywhere) {
+    .break-anywhere {
+        overflow-wrap: anywhere;
+    }
+}
 
 :root {
     --foreground-rgb: 51, 65, 85;
@@ -34,6 +45,18 @@ body {
 body {
     color: rgb(var(--foreground-rgb));
     @apply dark:bg-zinc-800;
+}
+
+.text-limited {
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+}
+
+.display-box-vertical {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
 }
 
 @layer utilities {

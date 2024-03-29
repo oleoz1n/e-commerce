@@ -50,7 +50,7 @@ export default function Produtos() {
                                     src: "https://www.girafa.com.br/visao/default/img/produtos/Telefonia/Celulares/iphone-12-pro-apple-128gb-dourado-tela-6-1-camera-tripla-12mp-ios-896300-1625227020-1-preview.webp",
                                     alt: "iPhone 12",
                                 }}
-                                nome="iPhone 12"
+                                nome="iPhone 121441241241214412412412144124 12412144124 12412144124 12412144124 12412144124 12412"
                                 preco={5400.99}
                                 id={1}
                             />
@@ -76,7 +76,7 @@ export default function Produtos() {
                                     alt: "iPhone 12",
                                 }}
                                 id={1}
-                                nome="iPhone 12 mega ultra trem baalta sô!"
+                                nome="iPhone 12 mega ultra trem baalta sô! ai0shudioahiod oahjdo jaosdj oajdoasoa hjdopashj oashjdiopahsiod haiodh iopajndiopqashjn dopajsiod"
                                 preco={5400.99}
                             />
                         </div>

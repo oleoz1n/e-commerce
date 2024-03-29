@@ -16,7 +16,12 @@ export default function ItemProduto({
     return (
         <Link
             href={"produtos/" + id}
-            className="flex max-w-72 flex-col flex-wrap items-center justify-center rounded-lg bg-slate-200 p-3 dark:bg-zinc-700"
+            className="flex h-96 max-w-72 flex-col items-center justify-center rounded-lg bg-slate-200 p-3 max-xl:h-fit max-xl:max-h-96 dark:bg-zinc-700"
+            // style={{
+            //     WebkitLineClamp: 3,
+            //     WebkitBoxOrient: "vertical",
+            //     display: "-webkit-box",
+            // }}
         >
             <div className="flex">
                 <Image
@@ -28,11 +33,11 @@ export default function ItemProduto({
                     draggable={false}
                 />
             </div>
-            <div className="mt-2 text-center">
-                <h1 className="flex max-w-72 flex-wrap overflow-hidden break-normal text-lg font-bold">
+            <div className="mt-2 flex max-w-64 flex-col gap-1 text-center">
+                <h1 className="text-limited text-md font-semibold max-xl:text-xl">
                     {nome}
                 </h1>
-                <p className="text-sm">R$ {preco}</p>
+                <p className="p-2 text-lg font-bold">R$ {preco}</p>
             </div>
         </Link>
     );
