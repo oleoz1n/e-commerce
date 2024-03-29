@@ -17,7 +17,10 @@ export default function RootLayout({
     return (
         <html lang="pt-br">
             <body
-                className={inter.className && "flex flex-col justify-between"}
+                className={
+                    inter.className &&
+                    "grid min-h-screen grid-rows-[auto,1fr,auto] "
+                }
             >
                 {children}
             </body>

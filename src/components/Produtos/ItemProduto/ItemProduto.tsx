@@ -16,12 +16,7 @@ export default function ItemProduto({
     return (
         <Link
             href={"produtos/" + id}
-            className="flex h-96 max-w-72 flex-col items-center justify-center rounded-lg bg-slate-200 p-3 max-xl:h-fit max-xl:max-h-96 dark:bg-zinc-700"
-            // style={{
-            //     WebkitLineClamp: 3,
-            //     WebkitBoxOrient: "vertical",
-            //     display: "-webkit-box",
-            // }}
+            className="flex h-96 max-w-72 flex-col items-center justify-center rounded-lg bg-slate-200 p-3 transition-all hover:scale-105 active:scale-95 max-xl:h-fit max-xl:max-h-96 dark:bg-zinc-700"
         >
             <div className="flex">
                 <Image

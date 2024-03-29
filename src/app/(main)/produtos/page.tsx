@@ -30,7 +30,7 @@ export default function Produtos() {
     }, []);
     return (
         <main
-            className={`mt-10 flex h-fit w-full p-4 ${windowSize.width < 1280 ? "flex-col gap-2" : "flex-row"}`}
+            className={`mt-10 flex min-h-full w-full p-4 ${windowSize.width < 1280 ? "flex-col gap-2" : "flex-row"}`}
         >
             {windowSize.width < 1280 ? (
                 <>
