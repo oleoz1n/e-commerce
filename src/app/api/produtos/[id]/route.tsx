@@ -11,8 +11,11 @@ export async function GET(
         "utf8",
     );
     const data = JSON.parse(file);
-    const produto = data.find(
-        (produto: Produto) => produto.id === parseInt(params.id),
-    );
-    return NextResponse.json(produto);
+    if (Number(params.id) > 0 && Number(params.id) <= data.length) {
+        const produto = data.find(
+            (produto: Produto) => produto.id === parseInt(params.id),
+        );
+        return NextResponse.json({ sucess: produto });
+    }
+    return NextResponse.json({ error: "Produto não encontrado" });
 }

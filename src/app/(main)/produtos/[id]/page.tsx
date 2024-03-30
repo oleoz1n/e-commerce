@@ -1,28 +1,35 @@
 "use client";
+import notFound from "@/app/not-found";
 import NotFound404 from "@/components/NotFound404";
 import ProdutoView from "@/components/Produtos/ProdutoView";
 import Produto from "@/interface/Produto";
 import { useEffect, useState } from "react";
 
 export default function ProdutosView({ params }: { params: { id: string } }) {
-    const [produto, setProduto] = useState<Produto>();
+    const [produto, setProduto] = useState<Produto | null>();
     const [loading, setLoading] = useState(true);
+    const [isNotFound, setIsNotFound] = useState(false);
     useEffect(() => {
         async function fetchProduto() {
             const response = await fetch("/api/produtos/" + params.id);
+            console.log(response.ok);
             const data = await response.json();
-            setProduto(data);
+            if (data.error) {
+                setProduto(null);
+                return;
+            }
+            setProduto(data.sucess);
         }
         fetchProduto();
     }, [params.id]);
     useEffect(() => {
         if (produto) {
             setLoading(false);
+        } else if (produto === null) {
+            setIsNotFound(true);
+            setLoading(false);
         }
     }, [produto]);
-    if (Number(params.id) > 2 || Number.isNaN(Number(params.id))) {
-        return NotFound404();
-    }
     return (
         <main className="h-full w-full">
             <div className="flex h-full items-center justify-center">
@@ -51,6 +58,8 @@ export default function ProdutosView({ params }: { params: { id: string } }) {
                             </svg>
                         </div>
                     </>
+                ) : isNotFound ? (
+                    <NotFound404 />
                 ) : (
                     <ProdutoView
                         desc={produto?.desc || ""}

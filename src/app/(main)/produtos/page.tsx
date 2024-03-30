@@ -5,6 +5,15 @@ import FilterProdutosMobile from "@/components/Produtos/Filter/FilterProdutosMob
 import InputSearch from "@/components/Produtos/Search/InputSearch";
 import ItemProduto from "@/components/Produtos/ItemProduto/ItemProduto";
 import Produto from "@/interface/Produto";
+import dynamic from "next/dynamic";
+import SkeletonItemProduto from "@/components/Skeleton/SkeletonItemProduto";
+
+const DynamicItemProduto = dynamic(
+    () => import("@/components/Produtos/ItemProduto/ItemProduto"),
+    {
+        loading: () => <SkeletonItemProduto />,
+    },
+);
 
 export default function Produtos() {
     const [checkboxesMarcadas, setCheckboxesMarcadas] = useState<string[]>([]);
@@ -57,7 +66,7 @@ export default function Produtos() {
                         <ul className="flex flex-row flex-wrap justify-center gap-6 p-4">
                             {produtos.map((produto, index) => (
                                 <li key={index}>
-                                    <ItemProduto
+                                    <DynamicItemProduto
                                         imagem={produto.imagem}
                                         nome={produto.nome}
                                         preco={produto.preco}
@@ -83,7 +92,7 @@ export default function Produtos() {
                         <ul className="flex flex-row flex-wrap justify-start gap-12 p-16">
                             {produtos.map((produto, index) => (
                                 <li key={index}>
-                                    <ItemProduto
+                                    <DynamicItemProduto
                                         imagem={produto.imagem}
                                         nome={produto.nome}
                                         preco={produto.preco}
