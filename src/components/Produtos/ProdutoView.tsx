@@ -1,17 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import Produto from "@/interface/Produto";
 
-interface Produto {
-    imagem: { src: string; alt: string };
-    nome: string;
-    preco: number;
-    desc: string;
-}
-
-export default function ProdutoView({ imagem, nome, preco, desc }: Produto) {
+export default function ProdutoView({ desc, imagem, nome, preco }: Produto) {
     return (
         <div className="flex h-fit max-w-full flex-row items-center gap-4 p-4 max-xl:flex-col">
-            <div className="flex w-3/6 justify-center rounded-lg">
+            <div className="flex w-3/6 justify-center rounded-lg max-xl:w-full">
                 <Image
                     className="h-fit rounded-lg border-2 border-slate-700 max-xl:w-full dark:border-zinc-700"
                     width={1000}

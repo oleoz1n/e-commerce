@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { FaTrash } from "react-icons/fa";
-
-interface Produto {
-    nome: string;
-    preco: number;
-    imagem: { src: string; alt: string };
-    qtd: number;
-}
+import Produto from "@/interface/Produto";
 
 export default function ProdutosCarrinho({
     imagem,
@@ -15,7 +9,7 @@ export default function ProdutosCarrinho({
     preco,
     qtd,
 }: Produto) {
-    const [quantidade, setQuantidade] = useState(qtd);
+    const [quantidade, setQuantidade] = useState(qtd ? qtd : 0);
     return (
         <>
             <div className="flex h-fit flex-col gap-4 bg-slate-200 p-4 dark:bg-zinc-700">

@@ -3,7 +3,7 @@ import { FaArrowDown } from "react-icons/fa";
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import dynamic from "next/dynamic";
-import SkeletonListItemHome from "@/components/Home/SkeletonListItemHome";
+import SkeletonListItemHome from "@/components/Skeleton/SkeletonListItemHome";
 import Link from "next/link";
 
 const DynamicListItemHome = dynamic(

@@ -1,26 +1,64 @@
+"use client";
 import NotFound404 from "@/components/NotFound404";
 import ProdutoView from "@/components/Produtos/ProdutoView";
-import React from "react";
-
-const desc =
-    "O iPhoneaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa 12 Pro Max é um smartphone iOS avançado e abrangente em todos os pontos de vista com algumas características excelentes. Tem uma grande tela de 6.7 polegadas com uma resolução de 2778x1284 pixels. As funcionalidades oferecidas pelo iPhone 12 Pro Max são muitas e inovadoras. Começando pelo LTE 5G que permite a transferência de dados e excelente navegação na internet. Enfatizamos a excelente memória interna de 512 GB mas sem a possibilidade de expansão.";
+import Produto from "@/interface/Produto";
+import { useEffect, useState } from "react";
 
 export default function ProdutosView({ params }: { params: { id: string } }) {
+    const [produto, setProduto] = useState<Produto>();
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        async function fetchProduto() {
+            const response = await fetch("/api/produtos/" + params.id);
+            const data = await response.json();
+            setProduto(data);
+        }
+        fetchProduto();
+    }, [params.id]);
+    useEffect(() => {
+        if (produto) {
+            setLoading(false);
+        }
+    }, [produto]);
     if (Number(params.id) > 2 || Number.isNaN(Number(params.id))) {
         return NotFound404();
     }
     return (
-        <main className="h-fit w-full">
+        <main className="h-full w-full">
             <div className="flex h-full items-center justify-center">
-                <ProdutoView
-                    desc={desc}
-                    imagem={{
-                        src: "https://www.girafa.com.br/visao/default/img/produtos/Telefonia/Celulares/iphone-12-pro-apple-128gb-dourado-tela-6-1-camera-tripla-12mp-ios-896300-1625227020-1-preview.webp",
-                        alt: "iphone",
-                    }}
-                    nome="iPhone 12 mega ultra trem baalta sô! ai0shudioahiod oahjdo jaosdj oajdoasoa hjdopashj oashjdiopahsiod haiodh iopajndiopqashjn dopajsiodaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-                    preco={31.99}
-                />
+                {loading ? (
+                    <>
+                        <div className="flex h-full w-full flex-1 items-center justify-center">
+                            <svg
+                                className="h-10 w-10 animate-spin text-white"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                            >
+                                <circle
+                                    className="opacity-25"
+                                    cx="12"
+                                    cy="12"
+                                    r="10"
+                                    stroke="rgb(var(--foreground-rgb))"
+                                    strokeWidth="4"
+                                ></circle>
+                                <path
+                                    className="opacity-75"
+                                    fill="rgb(var(--foreground-rgb))"
+                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                ></path>
+                            </svg>
+                        </div>
+                    </>
+                ) : (
+                    <ProdutoView
+                        desc={produto?.desc || ""}
+                        imagem={produto?.imagem || { src: "", alt: "" }}
+                        nome={produto?.nome || ""}
+                        preco={produto?.preco || 0}
+                    />
+                )}
             </div>
         </main>
     );

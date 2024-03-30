@@ -1,26 +1,17 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Produto from "@/interface/Produto";
 
-export default function ItemProduto({
-    imagem,
-    nome,
-    preco,
-    id,
-}: {
-    imagem: { src: string; alt: string };
-    nome: string;
-    preco: number;
-    id: number;
-}) {
+export default function ItemProduto({ imagem, nome, id, preco }: Produto) {
     return (
         <Link
             href={"produtos/" + id}
-            className="flex h-96 max-w-72 flex-col items-center justify-center rounded-lg bg-slate-200 p-3 transition-all hover:scale-105 active:scale-95 max-xl:h-fit max-xl:max-h-96 dark:bg-zinc-700"
+            className="flex max-h-96 max-w-72 flex-col items-center justify-center rounded-lg bg-slate-200 p-3 transition-all hover:scale-105 active:scale-95 dark:bg-zinc-700"
         >
-            <div className="flex">
+            <div className="flex h-full w-full">
                 <Image
-                    className="h-fit w-fit rounded-lg"
+                    className="h-fit w-fit rounded-lg max-lg:h-full"
                     width={250}
                     height={250}
                     src={imagem.src}

@@ -4,6 +4,7 @@ import FilterProdutos from "@/components/Produtos/Filter/FitlerProdutos";
 import FilterProdutosMobile from "@/components/Produtos/Filter/FilterProdutosMobile";
 import InputSearch from "@/components/Produtos/Search/InputSearch";
 import ItemProduto from "@/components/Produtos/ItemProduto/ItemProduto";
+import Produto from "@/interface/Produto";
 
 export default function Produtos() {
     const [checkboxesMarcadas, setCheckboxesMarcadas] = useState<string[]>([]);
@@ -13,6 +14,15 @@ export default function Produtos() {
         width: typeof window !== "undefined" ? window.innerWidth : 0,
         height: typeof window !== "undefined" ? window.innerHeight : 0,
     });
+    const [produtos, setProdutos] = useState<Produto[]>([]);
+    useEffect(() => {
+        async function fetchProdutos() {
+            const response = await fetch("/api/produtos");
+            const data = await response.json();
+            setProdutos(data);
+        }
+        fetchProdutos();
+    }, []);
 
     useEffect(() => {
         function handleResize() {
@@ -44,17 +54,18 @@ export default function Produtos() {
                     />
                     <div className="h-fit">
                         <InputSearch />
-                        <div className="flex flex-row flex-wrap justify-center gap-6 p-4">
-                            <ItemProduto
-                                imagem={{
-                                    src: "https://www.girafa.com.br/visao/default/img/produtos/Telefonia/Celulares/iphone-12-pro-apple-128gb-dourado-tela-6-1-camera-tripla-12mp-ios-896300-1625227020-1-preview.webp",
-                                    alt: "iPhone 12",
-                                }}
-                                nome="iPhone 121441241241214412412412144124 12412144124 12412144124 12412144124 12412144124 12412"
-                                preco={5400.99}
-                                id={1}
-                            />
-                        </div>
+                        <ul className="flex flex-row flex-wrap justify-center gap-6 p-4">
+                            {produtos.map((produto, index) => (
+                                <li key={index}>
+                                    <ItemProduto
+                                        imagem={produto.imagem}
+                                        nome={produto.nome}
+                                        preco={produto.preco}
+                                        id={produto.id}
+                                    />
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 </>
             ) : (
@@ -69,17 +80,18 @@ export default function Produtos() {
                     />
                     <div className="flex min-h-full w-4/5 flex-col p-2">
                         <InputSearch />
-                        <div className="flex flex-row flex-wrap justify-start gap-12 p-16">
-                            <ItemProduto
-                                imagem={{
-                                    src: "https://www.girafa.com.br/visao/default/img/produtos/Telefonia/Celulares/iphone-12-pro-apple-128gb-dourado-tela-6-1-camera-tripla-12mp-ios-896300-1625227020-1-preview.webp",
-                                    alt: "iPhone 12",
-                                }}
-                                id={1}
-                                nome="iPhone 12 mega ultra trem baalta sô! ai0shudioahiod oahjdo jaosdj oajdoasoa hjdopashj oashjdiopahsiod haiodh iopajndiopqashjn dopajsiod"
-                                preco={5400.99}
-                            />
-                        </div>
+                        <ul className="flex flex-row flex-wrap justify-start gap-12 p-16">
+                            {produtos.map((produto, index) => (
+                                <li key={index}>
+                                    <ItemProduto
+                                        imagem={produto.imagem}
+                                        nome={produto.nome}
+                                        preco={produto.preco}
+                                        id={produto.id}
+                                    />
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 </>
             )}
