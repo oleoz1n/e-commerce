@@ -7,7 +7,9 @@
         "imagem": {
             "src": "https://www.girafa.com.br/visao/default/img/produtos/Telefonia/Celulares/iphone-12-pro-apple-128gb-dourado-tela-6-1-camera-tripla-12mp-ios-896300-1625227020-1-preview.webp",
             "alt": "Iphone 12"
-        }
+        },
+        "tipo": "celulares",
+        "marca": "apple"
     },
     {
         "id": 2,
@@ -17,7 +19,9 @@
         "imagem": {
             "src": "https://www.girafa.com.br/visao/default/img/produtos/Telefonia/Celulares/iphone-12-pro-apple-128gb-dourado-tela-6-1-camera-tripla-12mp-ios-896300-1625227020-1-preview.webp",
             "alt": "Iphone 12"
-        }
+        },
+        "tipo": "celulares",
+        "marca": "apple"
     },
     {
         "id": 3,
@@ -27,7 +31,9 @@
         "imagem": {
             "src": "https://www.girafa.com.br/visao/default/img/produtos/Telefonia/Celulares/iphone-12-pro-apple-128gb-dourado-tela-6-1-camera-tripla-12mp-ios-896300-1625227020-1-preview.webp",
             "alt": "Iphone 12"
-        }
+        },
+        "tipo": "moveis",
+        "marca": "samsung"
     },
     {
         "id": 4,

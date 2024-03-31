@@ -1,5 +1,5 @@
 const Variaveis = {
-    MaiorPreco: 5400,
+    MaiorPreco: 10000,
 };
 
 export default Variaveis;

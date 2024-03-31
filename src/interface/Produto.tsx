@@ -5,4 +5,6 @@ export default interface Produto {
     preco: number;
     imagem: { src: string; alt: string };
     qtd?: number;
+    tipo?: string;
+    marca?: string;
 }

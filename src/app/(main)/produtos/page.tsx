@@ -15,15 +15,42 @@ const DynamicItemProduto = dynamic(
     },
 );
 
+const tiposDeProdutos = [
+    "informatica",
+    "eletrodomesticos",
+    "celulares",
+    "moveis",
+    "roupas",
+    "calcados",
+];
+
+const separeTypesCheckbox = (checkboxes: string[]) => {
+    const tipos = { tipo: [] as string[], marca: [] as string[] };
+    checkboxes.forEach((checkbox) => {
+        if (tiposDeProdutos.includes(checkbox)) {
+            tipos.tipo.push(checkbox);
+        } else {
+            tipos.marca.push(checkbox);
+        }
+    });
+    return tipos;
+};
+
 export default function Produtos() {
     const [checkboxesMarcadas, setCheckboxesMarcadas] = useState<string[]>([]);
     const [precoMin, setPrecoMin] = useState(0);
-    const [precoMax, setPrecoMax] = useState(5400);
+    const [precoMax, setPrecoMax] = useState(10000);
+    const [filtros, setFiltros] = useState({ tipo: [], marca: [] } as {
+        tipo: string[];
+        marca: string[];
+    });
     const [windowSize, setWindowSize] = useState({
         width: typeof window !== "undefined" ? window.innerWidth : 0,
         height: typeof window !== "undefined" ? window.innerHeight : 0,
     });
     const [produtos, setProdutos] = useState<Produto[]>([]);
+    const [produtosFiltrados, setProdutosFiltrados] = useState<Produto[]>([]);
+
     useEffect(() => {
         async function fetchProdutos() {
             const response = await fetch("/api/produtos");
@@ -47,6 +74,33 @@ export default function Produtos() {
         // Remove o event listener quando o componente é desmontado
         return () => window.removeEventListener("resize", handleResize);
     }, []);
+    useEffect(() => {
+        setFiltros(separeTypesCheckbox(checkboxesMarcadas));
+    }, [checkboxesMarcadas]);
+
+    useEffect(() => {
+        const produtosFiltrados = produtos.filter((produto) => {
+            if (filtros.tipo.length > 0) {
+                if (!filtros.tipo.includes(produto.tipo ?? "")) {
+                    return false;
+                }
+            }
+
+            if (filtros.marca.length > 0) {
+                if (!filtros.marca.includes(produto.marca ?? "")) {
+                    return false;
+                }
+            }
+
+            if (produto.preco < precoMin || produto.preco > precoMax) {
+                return false;
+            }
+
+            return true;
+        });
+
+        setProdutosFiltrados(produtosFiltrados);
+    }, [filtros, precoMin, precoMax, produtos]);
     return (
         <main
             className={`mt-10 flex min-h-full w-full p-4 ${windowSize.width < 1280 ? "flex-col gap-2" : "flex-row"}`}
@@ -64,7 +118,7 @@ export default function Produtos() {
                     <div className="h-fit">
                         <InputSearch />
                         <ul className="flex flex-row flex-wrap justify-center gap-6 p-4">
-                            {produtos.map((produto, index) => (
+                            {produtosFiltrados.map((produto, index) => (
                                 <li key={index}>
                                     <DynamicItemProduto
                                         imagem={produto.imagem}
@@ -90,7 +144,7 @@ export default function Produtos() {
                     <div className="flex min-h-full w-4/5 flex-col p-2">
                         <InputSearch />
                         <ul className="flex flex-row flex-wrap justify-start gap-12 p-16">
-                            {produtos.map((produto, index) => (
+                            {produtosFiltrados.map((produto, index) => (
                                 <li key={index}>
                                     <DynamicItemProduto
                                         imagem={produto.imagem}
