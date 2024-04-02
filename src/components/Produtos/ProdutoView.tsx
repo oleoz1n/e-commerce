@@ -2,7 +2,24 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Produto from "@/interface/Produto";
 
-export default function ProdutoView({ desc, imagem, nome, preco }: Produto) {
+export default function ProdutoView({
+    desc,
+    imagem,
+    nome,
+    preco,
+    id,
+}: Produto) {
+    const userId = localStorage.getItem("userEcommerceId");
+    const [disabled, setDisabled] = useState(false);
+    const handleAddCart = async () => {
+        setDisabled(true);
+        const response = await fetch(`/api/users/${userId}/cart/${id}`, {
+            method: "PUT",
+            body: JSON.stringify({ qtd: "add" }),
+        });
+        setDisabled(false);
+    };
+
     return (
         <div className="flex h-fit max-w-full flex-row items-center gap-4 p-4 max-xl:flex-col">
             <div className="flex w-3/6 justify-center rounded-lg max-xl:w-full">
@@ -23,7 +40,11 @@ export default function ProdutoView({ desc, imagem, nome, preco }: Produto) {
                     {desc}
                 </p>
                 <p className="text-center text-xl font-semibold">R$ {preco}</p>
-                <button className="rounded-lg bg-slate-700 p-2 font-semibold text-white transition-all hover:scale-105 active:scale-95 dark:bg-zinc-700">
+                <button
+                    onClick={handleAddCart}
+                    disabled={disabled}
+                    className="rounded-lg bg-slate-700 p-2 font-semibold text-white transition-all hover:scale-105 active:scale-95 dark:bg-zinc-700"
+                >
                     Adicionar ao carrinho
                 </button>
             </div>

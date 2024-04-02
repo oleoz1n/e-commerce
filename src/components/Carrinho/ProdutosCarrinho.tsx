@@ -9,11 +9,15 @@ export default function ProdutosCarrinho({
     qtd,
     setTotal,
     total,
+    userId,
+    setCart,
 }: {
     produtoId: string;
     qtd: number;
     setTotal: React.Dispatch<React.SetStateAction<number>>;
+    setCart: React.Dispatch<React.SetStateAction<{} | null>>;
     total: number;
+    userId: string;
 }) {
     const [quantidade, setQuantidade] = useState(qtd ? qtd : 0);
     const [nome, setNome] = useState("");
@@ -21,6 +25,7 @@ export default function ProdutosCarrinho({
     const [imagem, setImagem] = useState<{ src: string; alt: string } | null>(
         null,
     );
+    const [disabled, setDisabled] = useState(false);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         fetch(`/api/produtos/${produtoId}`)
@@ -40,9 +45,38 @@ export default function ProdutosCarrinho({
     useEffect(() => {
         if (imagem) setLoading(false);
     }, [imagem]);
+
+    const handleRefreshQuantidade = async (value: number) => {
+        setTotal(total + (value - quantidade) * preco!);
+        if (value <= 0) return handleDelete();
+        setDisabled(true);
+        const response = await fetch(`/api/users/${userId}/cart/${produtoId}`, {
+            method: "PUT",
+            body: JSON.stringify({ qtd: value }),
+        });
+        const data = await response.json();
+        if (response.status == 200) setQuantidade(data["cart"][produtoId]);
+        setDisabled(false);
+    };
+
+    const handleDelete = async () => {
+        const response = await fetch(`/api/users/${userId}/cart/${produtoId}`, {
+            method: "DELETE",
+        });
+        if (response.status == 200) {
+            setCart((prev) => {
+                const newCart: { [key: string]: any } = { ...prev };
+                delete newCart[produtoId];
+                return newCart;
+            });
+        }
+    };
     return (
         <>
-            <div className="flex h-fit w-full flex-col gap-4 bg-slate-200 p-4 dark:bg-zinc-700">
+            <div
+                id={`container-cart-${produtoId}`}
+                className="flex h-fit w-full flex-col gap-4 bg-slate-200 p-4 dark:bg-zinc-700"
+            >
                 {loading ? (
                     <LoadingCircle />
                 ) : (
@@ -72,10 +106,10 @@ export default function ProdutosCarrinho({
                         <div className="flex flex-row items-center justify-between">
                             <div>
                                 <button
-                                    disabled={quantidade === 1}
-                                    className="rounded-full bg-white p-1 dark:bg-zinc-800"
+                                    disabled={disabled}
+                                    className="rounded-full bg-white p-1 disabled:opacity-50 dark:bg-zinc-800"
                                     onClick={() =>
-                                        setQuantidade(quantidade - 1)
+                                        handleRefreshQuantidade(quantidade - 1)
                                     }
                                 >
                                     <svg
@@ -91,6 +125,7 @@ export default function ProdutosCarrinho({
                                 </button>
                                 <input
                                     type="text"
+                                    disabled={disabled}
                                     value={quantidade}
                                     onKeyPress={(event) => {
                                         if (isNaN(Number(event.key))) {
@@ -99,17 +134,23 @@ export default function ProdutosCarrinho({
                                     }}
                                     autoComplete="off"
                                     inputMode="numeric"
-                                    className="bg-transparent text-center text-[rgb(var(--foreground-rgb))] outline-none"
+                                    className="bg-transparent text-center text-[rgb(var(--foreground-rgb))] outline-none disabled:opacity-50"
                                     size={quantidade.toString().length}
                                     onChange={(e) =>
                                         setQuantidade(Number(e.target.value))
                                     }
+                                    onBlur={(e) =>
+                                        handleRefreshQuantidade(
+                                            Number(e.target.value),
+                                        )
+                                    }
                                 />
                                 <button
-                                    className="rounded-full bg-white p-1 dark:bg-zinc-800"
+                                    className="rounded-full bg-white p-1 disabled:opacity-50 dark:bg-zinc-800"
                                     onClick={() =>
-                                        setQuantidade(quantidade + 1)
+                                        handleRefreshQuantidade(quantidade + 1)
                                     }
+                                    disabled={disabled}
                                 >
                                     <svg
                                         viewBox="0 0 1024 1024"
@@ -124,7 +165,10 @@ export default function ProdutosCarrinho({
                                 </button>
                             </div>
                             <div>
-                                <button className=" transition-all hover:scale-110 hover:text-red-700 active:scale-95">
+                                <button
+                                    onClick={() => handleDelete()}
+                                    className=" transition-all hover:scale-110 hover:text-red-700 active:scale-95 disabled:opacity-50"
+                                >
                                     <FaTrash />
                                 </button>
                             </div>

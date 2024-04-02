@@ -12,7 +12,6 @@ export default function ProdutosView({ params }: { params: { id: string } }) {
     useEffect(() => {
         async function fetchProduto() {
             const response = await fetch("/api/produtos/" + params.id);
-            console.log(response.ok);
             const data = await response.json();
             if (data.error) {
                 setProduto(null);
@@ -66,6 +65,7 @@ export default function ProdutosView({ params }: { params: { id: string } }) {
                         imagem={produto?.imagem || { src: "", alt: "" }}
                         nome={produto?.nome || ""}
                         preco={produto?.preco || 0}
+                        id={produto?.id || 0}
                     />
                 )}
             </div>

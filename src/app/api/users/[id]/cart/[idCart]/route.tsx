@@ -39,7 +39,12 @@ export async function PUT(
         );
     }
     const cartRequest = await request.json();
-    user.cart[params.idCart] = parseInt(cartRequest.qtd);
+    if (cartRequest.qtd == "add") {
+        if (user.cart[params.idCart] == undefined) {
+            user.cart[params.idCart] = 0;
+        }
+        user.cart[params.idCart] = Number(user.cart[params.idCart]) + 1;
+    } else user.cart[params.idCart] = parseInt(cartRequest.qtd);
 
     const userIndex = users.findIndex(
         (user: { id: number }) => user.id === parseInt(params.id),
@@ -89,7 +94,7 @@ export async function DELETE(
             { status: 404 },
         );
     }
-    user.cart.splice(parseInt(params.idCart), 1);
+    delete user.cart[params.idCart];
     const userIndex = users.findIndex(
         (user: { id: number }) => user.id === parseInt(params.id),
     );
@@ -98,4 +103,5 @@ export async function DELETE(
         process.cwd() + "/src/app/api/users/users.json",
         JSON.stringify(users),
     );
+    return NextResponse.json(user);
 }
