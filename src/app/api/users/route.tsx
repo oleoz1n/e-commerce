@@ -18,5 +18,5 @@ export async function POST(request: Request) {
         JSON.stringify(userRole),
     );
 
-    return NextResponse.json({ body: userRoleRequest, status: 201 });
+    return NextResponse.json({ body: userRoleRequest }, { status: 201 });
 }

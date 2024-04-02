@@ -26,40 +26,10 @@ export async function GET(
         return NextResponse.json({ body: user, status: 200 });
     }
 
-    return NextResponse.json({ body: "Usuário não encontrado", status: 404 });
-}
-
-export async function PUT(
-    request: Request,
-    { params }: { params: { id: string } },
-) {
-    const file = await fs.readFile(
-        process.cwd() + "/src/app/api/users/users.json",
-        "utf-8",
+    return NextResponse.json(
+        { body: "Usuário não encontrado" },
+        { status: 404 },
     );
-
-    const users = await JSON.parse(file);
-    const userRequest = await request.json();
-
-    userRequest.id = parseInt(params.id);
-
-    if (!(await checkUser(userRequest))) {
-        return NextResponse.json({ body: "Usuário inválido", status: 400 });
-    }
-
-    const index = users.findIndex(
-        (user: { id: number }) => user.id === parseInt(params.id),
-    );
-
-    if (users[index] != undefined) {
-        users[index] = userRequest;
-        await fs.writeFile(
-            process.cwd() + "/src/app/api/users/users.json",
-            JSON.stringify(users),
-        );
-        return NextResponse.json({ body: userRequest, status: 200 });
-    }
-    return NextResponse.json({ body: "Usuário não encontrado", status: 404 });
 }
 
 export async function DELETE(
@@ -84,7 +54,10 @@ export async function DELETE(
             process.cwd() + "/src/app/api/users/users.json",
             JSON.stringify(users),
         );
-        return NextResponse.json({ body: user, status: 200 });
+        return NextResponse.json({ body: user });
     }
-    return NextResponse.json({ body: "Usuário não encontrado", status: 404 });
+    return NextResponse.json(
+        { body: "Usuário não encontrado" },
+        { status: 404 },
+    );
 }

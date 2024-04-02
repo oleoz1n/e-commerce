@@ -32,7 +32,10 @@ export async function GET(
         );
         return NextResponse.json({ sucess: produto });
     }
-    return NextResponse.json({ error: "Produto não encontrado" });
+    return NextResponse.json(
+        { error: "Produto não encontrado" },
+        { status: 404 },
+    );
 }
 
 export async function PUT(
@@ -61,7 +64,10 @@ export async function PUT(
         );
         return NextResponse.json({ sucess: produtoRequest });
     }
-    return NextResponse.json({ error: "Produto não encontrado" });
+    return NextResponse.json(
+        { error: "Produto não encontrado" },
+        { status: 404 },
+    );
 }
 
 export async function DELETE(
@@ -83,7 +89,13 @@ export async function DELETE(
             process.cwd() + "/src/app/api/produtos/produtos.json",
             JSON.stringify(produtos),
         );
-        return NextResponse.json({ sucess: "Produto deletado", body: produto });
+        return NextResponse.json(
+            { sucess: "Produto deletado", body: produto },
+            { status: 200 },
+        );
     }
-    return NextResponse.json({ error: "Produto não encontrado" });
+    return NextResponse.json(
+        { error: "Produto não encontrado" },
+        { status: 404 },
+    );
 }

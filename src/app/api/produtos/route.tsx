@@ -45,5 +45,5 @@ export async function POST(request: Request, response: Response) {
         JSON.stringify(produtos),
     );
 
-    return NextResponse.json({ body: produtoRequest, status: 201 });
+    return NextResponse.json({ body: produtoRequest }, { status: 201 });
 }
