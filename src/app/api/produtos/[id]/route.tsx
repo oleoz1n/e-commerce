@@ -10,8 +10,7 @@ const checkProduto = async (produto: any) => {
         produto.tipo == undefined ||
         produto.marca == undefined ||
         produto.imagem.src == undefined ||
-        produto.imagem.alt == undefined ||
-        produto.id == undefined
+        produto.imagem.alt == undefined
     ) {
         return false;
     }
