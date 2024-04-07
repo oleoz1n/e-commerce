@@ -13,7 +13,6 @@ export default function Loading({
     useEffect(() => {
         setLoading(false);
     }, []);
-
     return (
         <>
             {loading ? (

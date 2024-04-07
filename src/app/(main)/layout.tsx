@@ -1,19 +1,23 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "@/app/globals.css";
+"use client";
+import next from "next";
 import Loading from "./loading";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-    title: "E-commerce",
-    description: "Desenvolvido por oLeoz1n",
-};
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const userId = localStorage.getItem("userEcommerceId");
+    const router = useRouter();
+    useEffect(() => {
+        if (!userId) {
+            router.push("/login");
+        }
+    }, [userId]);
+
+    console.log(userId);
     return <Loading>{children} </Loading>;
 }

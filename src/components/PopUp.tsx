@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
 export default function PopUp({
     title,
@@ -7,7 +7,7 @@ export default function PopUp({
 }: {
     title: string;
     subtitle: string;
-    setShowPopUp: () => void;
+    setShowPopUp: Dispatch<SetStateAction<boolean>>;
 }) {
     return (
         <div className="absolute left-1/2 top-1/2 z-50 flex h-full w-full -translate-x-1/2 -translate-y-1/2 transform items-center justify-center rounded-xl backdrop-brightness-50">
@@ -16,7 +16,7 @@ export default function PopUp({
                 <p className="text-lg font-semibold">{subtitle}</p>
                 <button
                     className="mt-4 w-[60%] rounded-lg bg-blue-500 px-4 py-2 text-white max-lg:w-full"
-                    onClick={setShowPopUp}
+                    onClick={() => setShowPopUp(false)}
                 >
                     Ok
                 </button>

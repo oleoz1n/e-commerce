@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
     const file = await fs.readFile(
-        process.cwd() + "/src/app/api/produtos/produtos.json",
+        process.cwd() + "/src/app/api/users/users.json",
         "utf-8",
     );
 
