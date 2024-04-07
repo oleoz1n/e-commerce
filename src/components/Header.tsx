@@ -5,8 +5,11 @@ import { FaShoppingCart } from "react-icons/fa";
 import { IoBagRemove } from "react-icons/io5";
 import NavMobile from "./NavMobile";
 import Link from "next/link";
+import { CiLogout } from "react-icons/ci";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
+    const router = useRouter();
     const [windowSize, setWindowSize] = useState({
         width: typeof window !== "undefined" ? window.innerWidth : 0,
         height: typeof window !== "undefined" ? window.innerHeight : 0,
@@ -26,13 +29,6 @@ export default function Header() {
         // Remove o event listener quando o componente é desmontado
         return () => window.removeEventListener("resize", handleResize);
     }, []);
-    /* <Link
-                        className="text-blue-600 transition-all duration-300 hover:text-blue-800 hover:underline"
-                        href={'/cadastro'}
-                    >
-                        Crie sua conta
-                    </Link>
-                </p>*/
     return (
         <header className="h-fit w-full ">
             {windowSize.width < 768 ? (
@@ -46,7 +42,13 @@ export default function Header() {
                     </div>
                 </div>
             ) : (
-                <nav className="flex h-fit w-full flex-row items-center justify-evenly">
+                <nav className="relative flex h-fit w-full flex-row items-center justify-evenly">
+                    <Link
+                        href="/logout"
+                        className="absolute left-2 top-2 rounded-full bg-red-500 p-4"
+                    >
+                        <CiLogout />
+                    </Link>
                     <Link
                         scroll={false}
                         href={"/produtos"}
