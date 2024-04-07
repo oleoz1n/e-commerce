@@ -117,7 +117,7 @@ export default function Produtos() {
                     />
                     <div className="h-fit">
                         <InputSearch />
-                        <ul className="flex flex-row flex-wrap justify-center gap-6 p-4">
+                        <ul className="flex flex-row flex-wrap justify-center gap-6 pt-6">
                             {produtosFiltrados.map((produto, index) => (
                                 <li key={index}>
                                     <DynamicItemProduto
@@ -143,7 +143,7 @@ export default function Produtos() {
                     />
                     <div className="flex min-h-full w-4/5 flex-col p-2">
                         <InputSearch />
-                        <ul className="flex flex-row flex-wrap justify-start gap-12 p-16">
+                        <ul className="flex h-fit flex-row flex-wrap justify-start gap-12 p-16">
                             {produtosFiltrados.map((produto, index) => (
                                 <li key={index}>
                                     <DynamicItemProduto

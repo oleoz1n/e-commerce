@@ -30,6 +30,7 @@ export default function Login() {
             setTitle("Erro");
             setSubtitle("Houve um erro ao criar seu usuário");
         }
+        setShowPopUp(true);
     };
     const handleClickAdmin = async () => {
         const response = await fetch("/api/users", {
@@ -39,6 +40,7 @@ export default function Login() {
             },
             body: JSON.stringify({
                 role: "Admin",
+                cart: {},
             }),
         });
         if (response.status === 201) {
