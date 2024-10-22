@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import FilterProdutos from "@/components/Produtos/Filter/FitlerProdutos";
 import FilterProdutosMobile from "@/components/Produtos/Filter/FilterProdutosMobile";
 import InputSearch from "@/components/Produtos/Search/InputSearch";
-import ItemProduto from "@/components/Produtos/ItemProduto/ItemProduto";
 import Produto from "@/interface/Produto";
 import dynamic from "next/dynamic";
 import SkeletonItemProduto from "@/components/Skeleton/SkeletonItemProduto";
