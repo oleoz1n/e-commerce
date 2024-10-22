@@ -1,12 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    output: "export",
+
+    basePath: "/nextjs-github-pages",
+
     images: {
-        remotePatterns: [
-            {
-                protocol: "https",
-                hostname: "**",
-            },
-        ],
+        unoptimized: true,
     },
 };
 
