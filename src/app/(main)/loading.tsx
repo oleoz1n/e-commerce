@@ -3,24 +3,33 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import LoadingCircle from "@/components/LoadingCircle";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 
 export default function Loading({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const router = useRouter();
     const [loading, setLoading] = useState(true);
-    const [userId, setUserId] = useState<string | null>("");
+    const [user, setUser] = useState<string | null>("");
     useEffect(() => {
-        setUserId(localStorage.getItem("userEcommerceId"));
-        if (userId == null) {
-            router.push("/login");
-        } else if (userId != "" && userId != null) {
+        const user = localStorage.getItem("userEcommerce");
+
+        if (
+            user != null &&
+            user !== "" &&
+            user !== "{}" &&
+            user !== "undefined"
+        ) {
+            setUser(user);
+            setLoading(false);
+        } else {
+            localStorage.setItem(
+                "userEcommerce",
+                '{"role":"user", "cart": {}}',
+            );
             setLoading(false);
         }
-    }, [userId]);
+    }, []);
     return (
         <>
             {loading ? (

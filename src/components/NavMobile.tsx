@@ -82,7 +82,6 @@ const items = [
     { nome: "Home", uri: "/" },
     { nome: "Produtos", uri: "/produtos" },
     { nome: "Carrinho", uri: "/carrinho" },
-    { nome: "LogOut", uri: "/logout" },
 ];
 
 export default function HeaderMobile() {

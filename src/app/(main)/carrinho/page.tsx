@@ -1,8 +1,9 @@
 "use client";
 import SkeletonProdutosCarrinho from "@/components/Skeleton/SkeletonProdutosCarrinho";
 import dynamic from "next/dynamic";
-import React, { useEffect } from "react";
+import { useState, useEffect } from "react";
 import LoadingCircle from "@/components/LoadingCircle";
+import User from "@/interface/User";
 
 const DynamicProdutosCarrinho = dynamic(
     () => import("@/components/Carrinho/ProdutosCarrinho"),
@@ -12,18 +13,16 @@ const DynamicProdutosCarrinho = dynamic(
 );
 
 export default function Carrinho() {
-    const [cart, setCart] = React.useState<{} | null>(null);
-    const [total, setTotal] = React.useState(0);
-    const [loading, setLoading] = React.useState(true);
-    const userId = localStorage.getItem("userEcommerceId");
+    const [user, setUser] = useState<User | null>();
+    const [cart, setCart] = useState<{} | null>(null);
+    const [total, setTotal] = useState(0);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
-        fetch(`/api/users/${userId}`)
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.status === 404) return setCart({});
-                setCart(data.body.cart);
-            });
-    }, [userId]);
+        setUser(JSON.parse(localStorage.getItem("userEcommerce") ?? ""));
+    }, []);
+    useEffect(() => {
+        setCart(user?.cart ?? {});
+    }, [user?.cart, cart]);
     useEffect(() => {
         if (cart) setLoading(false);
     }, [cart]);
@@ -59,10 +58,12 @@ export default function Carrinho() {
                                                                 }
                                                             )[key]
                                                         }
-                                                        userId={userId ?? "0"}
                                                         setTotal={setTotal}
                                                         total={total}
                                                         setCart={setCart}
+                                                        user={user ?? null}
+                                                        // @ts-ignore
+                                                        setUser={setUser}
                                                     />
                                                 </li>
                                             );

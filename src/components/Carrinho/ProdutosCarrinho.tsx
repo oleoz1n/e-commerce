@@ -4,6 +4,7 @@ import { FaTrash } from "react-icons/fa";
 import LoadingCircle from "../LoadingCircle";
 import Link from "next/link";
 import Modal from "../Modal";
+import User from "@/interface/User";
 
 const PopupCustom = (
     setShowPopup: React.Dispatch<React.SetStateAction<boolean>>,
@@ -72,15 +73,17 @@ export default function ProdutosCarrinho({
     qtd,
     setTotal,
     total,
-    userId,
     setCart,
+    setUser,
+    user,
 }: {
     produtoId: string;
     qtd: number;
     setTotal: React.Dispatch<React.SetStateAction<number>>;
     setCart: React.Dispatch<React.SetStateAction<{} | null>>;
     total: number;
-    userId: string;
+    setUser: React.Dispatch<React.SetStateAction<User | null>>;
+    user: User | null;
 }) {
     const [quantidade, setQuantidade] = useState(qtd ? qtd : 0);
     const [nome, setNome] = useState("");
@@ -92,14 +95,15 @@ export default function ProdutosCarrinho({
     const [showPopup, setShowPopup] = useState(false);
     const [disabled, setDisabled] = useState(false);
     const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         fetch(`/api/produtos/${produtoId}`)
             .then((res) => res.json())
             .then((data) => {
                 if (data.error) return;
-                setNome(data.sucess.nome);
-                setPreco(data.sucess.preco);
-                setImagem(data.sucess.imagem);
+                setNome(data.nome);
+                setPreco(data.preco);
+                setImagem(data.imagem);
             });
     }, []);
     useEffect(() => {
@@ -116,15 +120,18 @@ export default function ProdutosCarrinho({
         quantidadeAnterior: number,
     ) => {
         setDisabled(true);
+
         setTotal(total + (value - quantidadeAnterior) * preco!);
         if (value <= 0) return ConfirmDelete();
-        const response = await fetch(`/api/users/${userId}/cart/${produtoId}`, {
-            method: "PUT",
-            body: JSON.stringify({ qtd: value }),
-        });
-        const data = await response.json();
-        if (response.status == 200) setQuantidade(data["cart"][produtoId]);
 
+        let newUser = user;
+        console.log(newUser);
+        if (newUser) {
+            newUser.cart[produtoId] = value;
+            localStorage.setItem("user", JSON.stringify(newUser));
+            setUser(newUser);
+            setQuantidade(value);
+        }
         setDisabled(false);
     };
 
@@ -133,10 +140,12 @@ export default function ProdutosCarrinho({
     };
 
     const handleDelete = async () => {
-        const response = await fetch(`/api/users/${userId}/cart/${produtoId}`, {
-            method: "DELETE",
-        });
-        if (response.status == 200) {
+        let newUser = user;
+
+        if (newUser) {
+            delete newUser.cart[produtoId];
+            localStorage.setItem("userEcommerce", JSON.stringify(newUser));
+            setUser(newUser);
             setCart((prev) => {
                 const newCart: { [key: string]: any } = { ...prev };
                 delete newCart[produtoId];

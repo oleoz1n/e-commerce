@@ -44,12 +44,6 @@ export default function Header() {
             ) : (
                 <nav className="relative flex h-fit w-full flex-row items-center justify-evenly">
                     <Link
-                        href="/logout"
-                        className="absolute left-2 top-2 rounded-full bg-red-500 p-4"
-                    >
-                        <CiLogout />
-                    </Link>
-                    <Link
                         scroll={false}
                         href={"/produtos"}
                         className="flex h-full flex-col items-center justify-center duration-300 hover:scale-110 active:scale-95"

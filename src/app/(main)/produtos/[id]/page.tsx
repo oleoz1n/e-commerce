@@ -12,12 +12,12 @@ export default function ProdutosView({ params }: { params: { id: string } }) {
     useEffect(() => {
         async function fetchProduto() {
             const response = await fetch("/api/produtos/" + params.id);
-            const data = await response.json();
-            if (data.error) {
+            if (!response.ok) {
                 setProduto(null);
                 return;
             }
-            setProduto(data.sucess);
+            const data = await response.json();
+            setProduto(data);
         }
         fetchProduto();
     }, [params.id]);

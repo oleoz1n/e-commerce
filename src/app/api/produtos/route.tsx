@@ -1,5 +1,5 @@
-import { promises as fs } from "fs";
 import { NextResponse } from "next/server";
+import produtos from "./produtos";
 
 const checkProduto = async (produto: any) => {
     if (
@@ -17,33 +17,5 @@ const checkProduto = async (produto: any) => {
 };
 
 export async function GET() {
-    const file = await fs.readFile(
-        process.cwd() + "/src/app/api/produtos/produtos.json",
-        "utf8",
-    );
-    const data = JSON.parse(file);
-    return NextResponse.json(data);
-}
-
-export async function POST(request: Request, response: Response) {
-    const file = await fs.readFile(
-        process.cwd() + "/src/app/api/produtos/produtos.json",
-        "utf-8",
-    );
-
-    const produtos = await JSON.parse(file);
-    const produtoRequest = await request.json();
-
-    if (!(await checkProduto(produtoRequest))) {
-        return NextResponse.json({ error: "Produto inválido" });
-    }
-
-    produtoRequest.id = produtos[produtos.length - 1].id + 1;
-    produtos.push(produtoRequest);
-    await fs.writeFile(
-        process.cwd() + "/src/app/api/produtos/produtos.json",
-        JSON.stringify(produtos),
-    );
-
-    return NextResponse.json({ body: produtoRequest }, { status: 201 });
+    return NextResponse.json(produtos);
 }

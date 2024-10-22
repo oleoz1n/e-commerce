@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Produto from "@/interface/Produto";
 import PopUp from "../PopUp";
+import User from "@/interface/User";
 
 export default function ProdutoView({
     desc,
@@ -10,21 +11,28 @@ export default function ProdutoView({
     preco,
     id,
 }: Produto) {
-    const userId = localStorage.getItem("userEcommerceId");
+    const [user, setUser] = useState<User | null>();
     const [disabled, setDisabled] = useState(false);
+
+    useEffect(() => {
+        setUser(JSON.parse(localStorage.getItem("userEcommerce") ?? ""));
+    }, []);
+
     const handleAddCart = async () => {
         setDisabled(true);
-        const response = await fetch(`/api/users/${userId}/cart/${id}`, {
-            method: "PUT",
-            body: JSON.stringify({ qtd: "add" }),
-        });
-        if (response.status === 200) {
+
+        if (id !== undefined && user) {
+            let newUser = user;
+            newUser.cart[id] ? newUser.cart[id]++ : (newUser.cart[id] = 1);
             setIsError(false);
             setShowPopUp(true);
+            localStorage.setItem("userEcommerce", JSON.stringify(newUser));
+            setUser(newUser);
         } else {
             setShowPopUp(true);
             setIsError(true);
         }
+
         setDisabled(false);
     };
     const [showPopUp, setShowPopUp] = useState(false);
