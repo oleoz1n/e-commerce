@@ -99,33 +99,38 @@ export default function FitlerProdutos({
                     <ul>
                         <ProdutosListItem
                             onChange={handleClick}
-                            name="samsung"
-                            text="Samsung"
-                        />
-                        <ProdutosListItem
-                            onChange={handleClick}
-                            name="apple"
-                            text="Apple"
-                        />
-                        <ProdutosListItem
-                            onChange={handleClick}
-                            name="lg"
+                            name="LG"
                             text="LG"
                         />
                         <ProdutosListItem
                             onChange={handleClick}
-                            name="motorola"
-                            text="Motorola"
+                            name="Apple"
+                            text="Apple"
                         />
                         <ProdutosListItem
                             onChange={handleClick}
-                            name="dell"
+                            name="Brastemp"
+                            text="Brastemp"
+                        />
+                        <ProdutosListItem
+                            onChange={handleClick}
+                            name="Nike"
+                            text="Nike"
+                        />
+                        <ProdutosListItem
+                            onChange={handleClick}
+                            name="Estofados Ideal"
+                            text="Estofados Ideal"
+                        />
+                        <ProdutosListItem
+                            onChange={handleClick}
+                            name="Lacoste"
+                            text="Lacoste"
+                        />
+                        <ProdutosListItem
+                            onChange={handleClick}
+                            name="Dell"
                             text="Dell"
-                        />
-                        <ProdutosListItem
-                            onChange={handleClick}
-                            name="hp"
-                            text="HP"
                         />
                     </ul>
                 </fieldset>
